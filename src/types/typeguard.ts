@@ -1,4 +1,4 @@
-import { MenuItemFlattened } from "./types";
+import { MenuItemFlattened } from './types';
 
 const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
@@ -8,8 +8,8 @@ const isNumber = (input: unknown): input is number => {
   return typeof input === 'number' || input instanceof Number;
 };
 
-const parseId = (id: unknown): string => {
-  if (!id || !isString(id)) {
+const parseId = (id: unknown): string | number => {
+  if (!id || (!isString(id) && !isNumber(id))) {
     throw new Error('Incorrect or missing id');
   }
   return id;
