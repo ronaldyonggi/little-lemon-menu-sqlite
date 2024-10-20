@@ -16,9 +16,11 @@ import {
   saveMenuItems,
   filterByQueryAndCategories,
   openDatabase,
-} from './database';
-import Filters from './components/Filters';
-import { getSectionListData, useUpdateEffect } from './utils';
+} from './src/utils/database';
+import Filters from './src/components/Filters';
+import { getSectionListData, useUpdateEffect } from './src/utils/utils';
+import { MenuItemFlattened, SectionListData } from './src/types/types';
+import { toMenuItemFlattened } from './src/types/typeguard';
 
 const API_URL =
   'https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu-items-by-category.json';
@@ -70,9 +72,11 @@ export default function App() {
 
         const sectionListData = getSectionListData(menuItems);
         setData(sectionListData);
-      } catch (e) {
-        // Handle error
-        Alert.alert(e.message);
+      } catch (e: unknown) {
+        if (e instanceof Error) {
+          // Handle error
+          Alert.alert(e.message);
+        }
       }
     })();
   }, []);
