@@ -1,12 +1,4 @@
-# Sample Snack app
+# Little Lemon Menu App with SQLite
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+This app is a submission to the final project of the course [Working with Data](https://www.coursera.org/learn/meta-working-with-data) by Meta, part of the [Meta React Native Specialization](https://www.coursera.org/specializations/meta-react-native).
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo-cli](https://docs.expo.io/get-started/installation).
-
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
-
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.io/c/snack).
-
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
-# little-lemon-menu-sqlite
