@@ -1,5 +1,5 @@
 type MenuItem = {
-  id: string;
+  id: string | number;
   title: string;
   price: string;
 };
