@@ -51,7 +51,14 @@ export default function App() {
     const res = await fetch(API_URL);
     const json = await res.json();
     const menu = json.menu;
-    const flatten = menu.map(toMenuItemFlattened);
+    // console.log(menu);
+    // const flatten = menu.map(toMenuItemFlattened);
+    const flatten = menu.map((item) => {
+      return {
+        ...item,
+        category: item.category.title,
+      };
+    });
     return flatten;
   };
 
