@@ -100,7 +100,6 @@ export default function App() {
           query,
           activeCategories
         );
-        console.log(menuItems);
         const sectionListData = getSectionListData(menuItems);
         setData(sectionListData);
       } catch (e) {
