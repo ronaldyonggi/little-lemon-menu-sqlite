@@ -20,7 +20,6 @@ import {
 import Filters from './src/components/Filters';
 import { getSectionListData, useUpdateEffect } from './src/utils/utils';
 import { MenuItemFlattened, SectionListData } from './src/types/types';
-import { toMenuItemFlattened } from './src/types/typeguard';
 
 const API_URL =
   'https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu-items-by-category.json';
@@ -51,7 +50,6 @@ export default function App() {
     const res = await fetch(API_URL);
     const json = await res.json();
     const menu = json.menu;
-    // console.log(menu);
     // const flatten = menu.map(toMenuItemFlattened);
     const flatten = menu.map((item) => {
       return {
@@ -102,6 +100,7 @@ export default function App() {
           query,
           activeCategories
         );
+        console.log(menuItems);
         const sectionListData = getSectionListData(menuItems);
         setData(sectionListData);
       } catch (e) {
