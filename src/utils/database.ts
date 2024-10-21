@@ -62,27 +62,19 @@ export async function saveMenuItems(menuItems: MenuItemFlattened[]) {
  *
  */
 export async function filterByQueryAndCategories(query, activeCategories) {
-  return new Promise((resolve, reject) => {
-    resolve(SECTION_LIST_MOCK_DATA);
-  });
-  // db = await SQLite.openDatabaseAsync('little_lemon');
+  const searchFilter = `%${query}%`;
+  const placeholders = activeCategories.map(() => '?').join(',');
 
-  // if (query && activeCategories) {
-  //   return await db.getAllAsync(
-  //     'SELECT * FROM menuitems WHERE (category in ? and title like ?)',
-  //     [activeCategories, `%${query}%`]
-  //   );
-  // } else if (query) {
-  //   return await db.getAllAsync(
-  //     'SELECT * FROM menuitems WHERE title like ?',
-  //     `%${query}%`
-  //   );
-  // } else if (activeCategories) {
-  //   return await db.getAllAsync(
-  //     `SELECT * FROM menuitems WHERE category in ?)`,
-  //     activeCategories
-  //   );
-  // } else {
-  //   return await db.getAllAsync(`SELECT * FROM menuitems`);
-  // }
+  const command = `
+  SELECT * FROM menuitems 
+  WHERE (category in (${placeholders}))
+  AND title LIKE ?
+  `;
+
+  const params = [...activeCategories, searchFilter];
+  return await db.getAllAsync(
+    // 'SELECT * FROM menuitems where category in (?)',
+    command,
+    params
+  );
 }
