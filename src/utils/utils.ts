@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { MenuItemFlattened, SectionListData } from '../types/types';
+import { MenuItem, MenuItemFlattened, SectionListData } from '../types/types';
 
 export const SECTION_LIST_MOCK_DATA: SectionListData[] = [
   {
@@ -46,45 +46,20 @@ export function getSectionListData(data: MenuItemFlattened[]) {
   // The title of each section should be the category.
   // The data property should contain an array of menu items.
   // Each item has the following properties: "id", "title" and "price"
-  const toBeReturned: SectionListData[] = [
-    {
-      title: 'Appetizers',
-      data: [],
-    },
-    {
-      title: 'Salads',
-      data: [],
-    },
-    {
-      title: 'Beverages',
-      data: [],
-    },
-  ];
-
-  data.forEach((item) => {
-    const itemWithoutCategory = {
-      id: item.id,
-      title: item.title,
-      price: item.price,
-    };
-
-    switch (item.category) {
-      case 'Appetizers':
-        toBeReturned[0].data.push(itemWithoutCategory);
-        break;
-      case 'Salads':
-        toBeReturned[1].data.push(itemWithoutCategory);
-        break;
-      case 'Beverages':
-        toBeReturned[2].data.push(itemWithoutCategory);
-        break;
-      default:
-        break;
+  const sectionMap = new Map<string, MenuItem[]>();
+  for (const item of data) {
+    const { category, id, title, price } = item;
+    if (!sectionMap.has(category)) {
+      sectionMap.set(category, []);
     }
-  });
 
-  // return SECTION_LIST_MOCK_DATA;
-  return toBeReturned;
+    sectionMap.get(category)!.push({ id, title, price });
+  }
+
+  return Array.from(sectionMap, ([key, value]) => ({
+    title: key,
+    data: value,
+  }));
 }
 
 export function useUpdateEffect(effect, dependencies = []) {
