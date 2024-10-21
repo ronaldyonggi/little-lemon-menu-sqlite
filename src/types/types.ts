@@ -1,4 +1,4 @@
-type MenuItem = {
+export type MenuItem = {
   id: string | number;
   title: string;
   price: string;
@@ -18,4 +18,3 @@ export interface SectionListData {
 export interface MenuItemFlattened extends MenuItem {
   category: string;
 }
-
